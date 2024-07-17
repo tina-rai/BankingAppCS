@@ -18,7 +18,7 @@ using System.Data.SqlClient;
     SqlConnection con = new SqlConnection("Data Source = TINA\\SQLEXPRESS; Initial Catalog = bankingapp; Integrated Security = True; Encrypt = False");
     con.Open();
 
-    string depositQuery = "INSERT INTO account(name, address, balance, accountno," +
+    string depositQuery = "INSERT INTO account_new(name, address, balance, accountno," +
         "date, deposit) VALUES(@name, @add, @balance, @acc, @date, @deposit)";
 
     SqlCommand cmd = new SqlCommand(depositQuery, con);
@@ -62,7 +62,7 @@ private string AccountNo()
       int balance = 0;
       SqlConnection con = new SqlConnection("Data Source = TINA\\SQLEXPRESS; Initial Catalog = bankingapp; Integrated Security = True; Encrypt = False");
       con.Open();
-      string readQuery = "SELECT* FROM account WHERE accountno= @acc";
+      string readQuery = "SELECT* FROM account_new WHERE accountno= @acc";
       SqlCommand cmd = new SqlCommand(readQuery, con);
       cmd.Parameters.AddWithValue("@acc", txtAcc.Text);
       int count = Convert.ToInt32(cmd.ExecuteScalar());
@@ -80,7 +80,7 @@ private string AccountNo()
           if (balance > 0 && balance > Convert.ToInt32(txtBalance.Text))
           {
               int newBalance = balance - int.Parse(txtBalance.Text);
-              string updateQuery = "UPDATE account SET balance= @balance, withdraw= @with" +
+              string updateQuery = "UPDATE account_new SET balance= @balance, withdraw= @with" +
                                                              "WHERE accountno= @accno";
               SqlCommand cmdup = new SqlCommand(updateQuery, con);
               cmdup.Parameters.AddWithValue("@balance", newBalance);
@@ -113,7 +113,7 @@ private string AccountNo()
   {
       SqlConnection con = new SqlConnection("Data Source = TINA\\SQLEXPRESS; Initial Catalog = bankingapp; Integrated Security = True; Encrypt = False");
       con.Open();
-      string selectQuery = "SELECT * FROM account WHERE accountno= @acc";
+      string selectQuery = "SELECT * FROM account_new WHERE accountno= @acc";
       SqlCommand cmd = new SqlCommand(selectQuery, con);
       cmd.Parameters.AddWithValue("@acc", txtAcc.Text);
       SqlDataReader reader = cmd.ExecuteReader();
