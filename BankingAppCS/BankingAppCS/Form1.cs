@@ -26,7 +26,11 @@ using System.Data.SqlClient;
     cmd.Parameters.AddWithValue("@name", txtName.Text);
     cmd.Parameters.AddWithValue("@add", txtAdd.Text);
     cmd.Parameters.AddWithValue("@balance", txtBalance.Text);
-    cmd.Parameters.AddWithValue("@date", dtDate.Text);
+    //cmd.Parameters.AddWithValue("@date", dtDate.Text);
+ DateTime enteredDate = DateTime.Parse(dtDate.Text);  // Assuming valid date format
+ string formattedDate = enteredDate.ToString("yyyy-MM-dd");
+ cmd.Parameters.AddWithValue("@date", formattedDate);
+ 
     cmd.Parameters.AddWithValue("@deposit", txtBalance.Text);
     string accountno = AccountNo();
     cmd.Parameters.AddWithValue("@acc", accountno);
